@@ -1,6 +1,7 @@
 Config = {}
 
 Config.DoorList = {
+-- Double doors Example
 --	{
 --		authorizedJobs = { 'job' },
 --		object = 2155710627,
@@ -12,6 +13,7 @@ Config.DoorList = {
 --		locked = true,
 --		distance = 1.0
 --	},
+-- Double doors Example END
 	{
 		authorizedJobs = { 'police' },
 		object = 1988748538,
