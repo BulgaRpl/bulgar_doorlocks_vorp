@@ -1,6 +1,17 @@
 Config = {}
 
 Config.DoorList = {
+--	{
+--		authorizedJobs = { 'job' },
+--		object = 2155710627,
+--		object2 = 1920184275,
+--		objCoords  = vector3(2686.21, -1359.97, 48.23),
+--		textCoords  = vector3(2686.21, -1359.97, 48.23),
+--		objYaw = 130.0,
+--		objYaw2 = -230.0,
+--		locked = true,
+--		distance = 1.0
+--	},
 	{
 		authorizedJobs = { 'police' },
 		object = 1988748538,
