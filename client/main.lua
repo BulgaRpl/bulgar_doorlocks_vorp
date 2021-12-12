@@ -113,7 +113,7 @@ function makeEntityFaceEntity( entity1, coords , k)
                 DeleteObject(prop)
                 RemoveAnimDict("script_common@jail_cell@unlock@key")
                 key = false
-                TriggerEvent("bulgar_doorlocks_vorp:updatedoor", GetPlayerServerId(), k)
+                TriggerEvent("bulgar_doorlocks_vorp:updatedoor", GetPlayerServerId(PlayerId()), k)
                 break
             end
         end
