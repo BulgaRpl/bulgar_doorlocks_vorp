@@ -153,22 +153,50 @@ AddEventHandler('bulgar_doorlocks_vorp:setState', function(doorID, state)
     Config.DoorList[doorID].locked = state
 end)
 
---FixBankDoors / Turn on if you have a problems with Bank Doors.
---local door_hashes = {
---    -408139633,      -- BANCO DE VALENTINE
---    -1652509687,     -- BANCO DE VALENTINE
---    -1477943109,     -- BANCO DE SAINT DENIS
---    2089945615,      -- BANCO DE SAINT DENIS
---    -2136681514,     -- BANCO DE SAINT DENIS
---    1733501235,      -- BANCO DE SAINT DENIS
---    -977211145,      -- BANCO DE RHODES
---    -1206757990,     -- BANCO DE RHODES
---    531022111,       -- BANCO DE BLACKWATER
---}
+--FixBankDoors / Uncommend all bellow if you have a problems with Bank Doors.
+-- local door_hashes = {
+    -- -408139633,     -- Valentine Bank
+    -- -1652509687,    -- Valentine Bank
+    -- -1477943109,    -- Saint Denis Bank
+    -- 2089945615,     -- Saint Denis Bank
+    -- -2136681514,    -- Saint Denis Bank
+    -- 1733501235,     -- Saint Denis Bank
+    -- -977211145,     -- Rhodes Bank
+    -- -1206757990,    -- Rhodes Bank
+    -- 531022111,      -- Blackwater Bank
+    -- 160636303,      -- Armadillo Bank
+    -- -1669881355,    -- Rhodes Gunshop Basement Door
+    -- 340151973,      -- New Theater Door
+    -- 544106233,      -- New Theater Door
+    -- 94437577,       -- Strawberry Dressing Room
+-- }
 
---Citizen.CreateThread(function()
---    for k,v in pairs(door_hashes) do 
---        Citizen.InvokeNative(0xD99229FE93B46286,v,1,1,0,0,0,0)
---        Citizen.InvokeNative(0x6BAB9442830C7F53,v,0) 
---    end
---end)
+-- Citizen.CreateThread(function()
+    -- for k,v in pairs(door_hashes) do 
+        -- Citizen.InvokeNative(0xD99229FE93B46286,v,1,1,0,0,0,0)
+        -- Citizen.InvokeNative(0x6BAB9442830C7F53,v,0) 
+    -- end
+-- end)
+
+-- local doors_delete = {
+    -- 73503,
+    -- 5867812,
+    -- 5966884,
+    -- 5966372,
+    -- 5965092,
+    -- 2663716,
+    -- 6278948,
+    -- 6382116,
+    -- 5772068,
+    -- 6260516,
+    -- 5989668,
+    -- 5966628,
+    -- 5789476
+-- }
+
+-- Citizen.CreateThread(function()
+    -- for k,v in pairs(doors_delete) do
+        -- SetEntityAsMissionEntity(v, true, true)
+        -- DeleteEntity(v)
+    -- end
+-- end)
