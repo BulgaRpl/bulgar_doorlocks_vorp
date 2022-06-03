@@ -242,7 +242,7 @@ Config.DoorList = {
 		distance = 1.0
 	},
 	{
-		authorizedJobs = { 'medic' },
+		authorizedJobs = { 'doctor','police' },
 		object = 3588026089,
 		objCoords  = vector3(-282.81, 803.85, 118.39),
 		textCoords  = vector3(-283.81, 803.85, 119.39),
@@ -251,7 +251,7 @@ Config.DoorList = {
 		distance = 1.0
 	},
 	{
-		authorizedJobs = { 'medic' },
+		authorizedJobs = { 'doctor','police' },
 		object = 4067537969,
 		objCoords  = vector3(-286.65, 809.76, 118.39),
 		textCoords  = vector3(-287.65, 809.76, 119.39),
@@ -260,21 +260,21 @@ Config.DoorList = {
 		distance = 1.0
 	},
 	{
-		authorizedJobs = { 'medic' },
+		authorizedJobs = { 'doctor','police' },
 		object = 3439738919,
 		objCoords  = vector3(-281.18, 815.41, 118.39),
 		textCoords  = vector3(-281.18, 816.2, 119.39),
 		objYaw = 97.0,
-		locked = false,
+		locked = true,
 		distance = 1.0
 	},
 	{
-		authorizedJobs = { 'medic' },
+		authorizedJobs = { 'doctor','police' },
 		object = 925575409,
 		objCoords  = vector3(-290.72, 813.29, 118.41),
 		textCoords  = vector3(-289.8, 813.29, 119.39),
 		objYaw = 10.0,
-		locked = false,
+		locked = true,
 		distance = 1.0
 	},
 }
