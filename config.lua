@@ -1,4 +1,5 @@
 Config = {}
+Config.useitems = false
 
 Config.DoorList = {
 -- Double doors Example
