@@ -67,6 +67,11 @@ Citizen.CreateThread(function()
             end
             if distance < maxDistance then
                 DrawText3D(doorID.textCoords.x, doorID.textCoords.y, doorID.textCoords.z, " " ,doorID.locked)
+                if Config.useitems == false then
+                    if IsControlJustPressed(2, 0xE8342FF2) then -- Hold ALT
+                        makeEntityFaceEntity(PlayerPedId(), doorID.textCoords , k )
+                    end
+                end
             end
         end
         if sleep then
@@ -177,9 +182,12 @@ AddEventHandler('bulgar_doorlocks_vorp:opendoor', function(lockbreak)
                 end
             end
         end
-        if distance <= maxDistance and not lockbreak then
+        if Config.useitems then
+            if distance <= maxDistance and not lockbreak then
             makeEntityFaceEntity(PlayerPedId(), doorID.textCoords , k)
+            end
         end
+
         if  distance <= maxDistance and lockbreak == true and doorID.locked == false then
             TriggerEvent("vorp:TipBottom", "The Door Is Already Open !", 2000)
             
