@@ -125,8 +125,53 @@ function makeEntityFaceEntity( entity1, coords , k)
     end
 end
 
+function makeEntityFaceEntity2( entity1, coords , k)
+    local p1 = GetEntityCoords(entity1, true)
+    local p2 = coords
+    local dx = p2.x - p1.x
+    local dy = p2.y - p1.y
+    local heading = GetHeadingFromVector_2d(dx, dy)
+    SetEntityHeading( entity1, heading )
+    Wait(100)
+    ClearPedTasks(ped)
+    prop_name = 'P_KEY02X'
+    local ped = entity1
+    local x,y,z = table.unpack(GetEntityCoords(ped, true))
+    local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+    local boneIndex = GetEntityBoneIndexByName(ped, "SKEL_R_Finger12")
+    local key = false
+    if not IsEntityPlayingAnim(ped, "script_common@jail_cell@unlock@key", "action", 3) then
+        local waiting = 0
+        RequestAnimDict("script_common@jail_cell@unlock@key")
+        while not HasAnimDictLoaded("script_common@jail_cell@unlock@key") do
+            waiting = waiting + 100
+            Citizen.Wait(100)
+            if waiting > 5000 then
+                break
+            end
+        end
+        Wait(100)
+        TaskPlayAnim(ped, 'script_common@jail_cell@unlock@key', 'action', 8.0, -8.0, 2500, 31, 0, true, 0, false, 0, false)
+        Wait(750)
+        AttachEntityToEntity(prop, ped,boneIndex, 0.02, 0.0120, -0.00850, 0.024, -160.0, 200.0, true, true, false, true, 1, true)
+        key = true
+        while key do
+            if IsEntityPlayingAnim(ped, "script_common@jail_cell@unlock@key", "action", 3) then
+                Wait(100)
+            else
+                ClearPedSecondaryTask(ped)
+                DeleteObject(prop)
+                RemoveAnimDict("script_common@jail_cell@unlock@key")
+                key = false
+                TriggerServerEvent("bulgar_doorlocks_vorp:updatedooritm", GetPlayerServerId(PlayerId()), k, lockbreak, function(cb) end)
+                break
+            end
+        end
+    end
+end
+
 RegisterNetEvent('bulgar_doorlocks_vorp:opendoor')
-AddEventHandler('bulgar_doorlocks_vorp:opendoor', function(lockbreak)
+AddEventHandler('bulgar_doorlocks_vorp:opendoor', function(lockbreak, itm)
     local playerCoords = GetEntityCoords(PlayerPedId())
     for k,doorID in ipairs(Config.DoorList) do
         local distance
@@ -182,19 +227,21 @@ AddEventHandler('bulgar_doorlocks_vorp:opendoor', function(lockbreak)
                 end
             end
         end
-        if Config.useitems then
-            if distance <= maxDistance and not lockbreak then
-            makeEntityFaceEntity(PlayerPedId(), doorID.textCoords , k)
-            end
+        if Config.useitems and doorID.authorizedItem == itm and not lockbreak and distance <= maxDistance then
+            makeEntityFaceEntity2(PlayerPedId(), doorID.textCoords , k)
+        elseif Config.useitems and not lockbreak and doorID.authorizedItem ~= itm and distance <= maxDistance then
+            TriggerEvent("vorp:TipBottom", "Wrong key !", 2000)
         end
 
         if  distance <= maxDistance and lockbreak == true and doorID.locked == false then
             TriggerEvent("vorp:TipBottom", "The Door Is Already Open !", 2000)
             
-        elseif distance <= maxDistance and lockbreak == true and doorID.locked == true then
+        elseif distance <= maxDistance and lockbreak == true and doorID.locked == true and doorID.canlockbreak then
             
             TriggerEvent('bulgar_doorlocks_vorp:updatedoor', GetPlayerServerId(PlayerId()), k, lockbreak)
+        elseif distance <= maxDistance and lockbreak == true and doorID.locked == true and doorID.canlockbreak == false then
 
+            TriggerEvent("vorp:TipBottom", "You can't lockbreak this door !", 2000)
         end
     end
 end)
