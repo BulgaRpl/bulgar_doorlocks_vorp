@@ -31,6 +31,12 @@ AddEventHandler('bulgar_doorlocks_vorp:updatedoorsv', function(source, doorID, c
 	end
 end)
 
+RegisterServerEvent('bulgar_doorlocks_vorp:updatedooritm')
+AddEventHandler('bulgar_doorlocks_vorp:updatedooritm', function(source, doorID, cb)
+    local _source = source
+		TriggerClientEvent('bulgar_doorlocks_vorp:changedoor', _source, doorID)
+end)
+
 RegisterServerEvent('bulgar_doorlocks_vorp:updatedoorbreak')
 AddEventHandler('bulgar_doorlocks_vorp:updatedoorbreak', function(source, doorID, cb)
     local _source = source
@@ -51,17 +57,6 @@ AddEventHandler('bulgar_doorlocks_vorp:updateState', function(doorID, state, cb)
 	TriggerClientEvent('bulgar_doorlocks_vorp:setState', -1, doorID, state)
 end)
 
-
-VorpInv.RegisterUsableItem("consumable_lock_breaker", function(data)
-	VorpInv.CloseInv(data.source)
-	TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, true)
-end)
-
-VorpInv.RegisterUsableItem("provision_jail_keys", function(data)
-	VorpInv.CloseInv(data.source)
-	TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, false)
-end)
-
 RegisterServerEvent('bulgar_doorlocks_vorp:lockbreaker:break')
 AddEventHandler('bulgar_doorlocks_vorp:lockbreaker:break', function()
     local _source = source
@@ -78,3 +73,26 @@ function IsAuthorized(jobName, doorID)
 	end
 	return false
 end
+
+
+VorpInv.RegisterUsableItem("consumable_lock_breaker", function(data)
+	VorpInv.CloseInv(data.source)
+	TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, true)
+end)
+----------------- Registre new keys below------------------
+
+-- New Key Example
+--VorpInv.RegisterUsableItem("itemname", function(data)
+	--VorpInv.CloseInv(data.source)
+	--TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, false, 'itemname')
+--end)
+
+VorpInv.RegisterUsableItem("provision_jail_keys", function(data)
+	VorpInv.CloseInv(data.source)
+	TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, false, 'provision_jail_keys')
+end)
+
+VorpInv.RegisterUsableItem("doctor_keys", function(data)
+	VorpInv.CloseInv(data.source)
+	TriggerClientEvent("bulgar_doorlocks_vorp:opendoor", data.source, false, 'doctor_keys')
+end)
