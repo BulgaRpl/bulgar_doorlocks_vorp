@@ -1,4 +1,7 @@
-Door lock system made to be used with VORP 2.0
+Free Door Lock system made to be used with VORP ( https://github.com/vorpcore )
+
+An extended and slightly improved version of the script can be found here:
+"BulgaR Doorlocks [VORP] & [RSGCore] & [QBRCore] & [RedEM:RP]" --> https://bulgar.tebex.io/package/4834454
 
 Includes:
 - Door lock animation.
